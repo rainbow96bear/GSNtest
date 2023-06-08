@@ -25,6 +25,25 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "oldTarget",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "newTarget",
+						"type": "address"
+					}
+				],
+				"name": "TargetChanged",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "CALLDATA_SIZE_LIMIT",
 				"outputs": [
@@ -79,6 +98,19 @@
 			{
 				"inputs": [],
 				"name": "PRE_RELAYED_CALL_GAS_LIMIT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -387,6 +419,19 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_target",
+						"type": "address"
+					}
+				],
+				"name": "setTarget",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "forwarder",
 						"type": "address"
 					}
@@ -410,6 +455,19 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "target",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -558,7 +616,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"testPaymaster.sol": "AcceptEverythingPaymaster"
+			"testSinglePaymaster.sol": "TestSinglePaymaster"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -708,12 +766,12 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"testPaymaster.sol": {
-			"keccak256": "0x450d2d9e0afacf5ac74ae9b728e8435568651e9f104ccae0136a6ab49bcf5649",
+		"testSinglePaymaster.sol": {
+			"keccak256": "0xdb5d50db511bb4538eb2d112b61e30eef39b1f69602ad4dc98ad553b8b9de864",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a5a5101e58f87f2e83410973c9f723499467467a7f729b62aaa5842102623497",
-				"dweb:/ipfs/QmaRutoqX8i8QZbaTJqu6eMmCaKERQFPANo92eG266GzkX"
+				"bzz-raw://6668292d4da8008f94a16044f85b8c3ca89df29a5b472e05d70414c2a0107950",
+				"dweb:/ipfs/QmcNWTwyxHxtVeEEhZyx79iR9orDXw9nFKecqBTf8DcYqN"
 			]
 		}
 	},

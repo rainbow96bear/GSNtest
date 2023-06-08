@@ -91,7 +91,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "getBalanec",
+				"name": "getBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -571,7 +571,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"testPaymaster.sol": "TestPaymaster"
+			"testEverythingPaymaster.sol": "TestEverythingPaymaster"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -721,12 +721,12 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"testPaymaster.sol": {
-			"keccak256": "0xc391bf610d1602901096941809218397d557f4c99e01b0a95312819175077119",
+		"testEverythingPaymaster.sol": {
+			"keccak256": "0x956ad5bb424781a632d26de238dc4fa6e853ca0155c0f806fd2adb26430dcd74",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e4abf416a935ddd897c7ea36067cdcbb71cac89d596be2e469357d244c80d2c9",
-				"dweb:/ipfs/Qmcysgad3rHx3Dwvn3PTUo5NXZAS6nBPRAgPvqNxfjLJgC"
+				"bzz-raw://e9a95f9ab4eb639e3f66a72a888af5a3d26b8fc6847be1278a829d94ff394cb3",
+				"dweb:/ipfs/Qme1AE28HDXmAuLgdsVpmFrM9GtLjtgndLuHzRdGvLAzHr"
 			]
 		}
 	},

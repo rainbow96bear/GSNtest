@@ -9,7 +9,7 @@ import "@opengsn/contracts/src/BasePaymaster.sol";
 //
 // NOTE: Do NOT use this contract on a mainnet: it accepts anything, so anyone can "grief" it and drain its account
 
-contract TestPaymaster is BasePaymaster {
+contract TestEverythingPaymaster is BasePaymaster {
     uint256 balance = 0;
 
     function versionPaymaster() external view override virtual returns (string memory){
@@ -41,14 +41,8 @@ contract TestPaymaster is BasePaymaster {
     virtual {
         (context, success, gasUseWithoutPost, relayData);
     }
-    // 입출금 작업 + onlyOwner modifier
-
-    function deposit() private {
-        balance += msg.value;
+  
+    function getBalance()public view returns(uint256){
+       return relayHub.balanceOf(address(this));
     }
-
-    function getBalanec()public view returns(uint256){
-        return address(this).balance;
-    }
-
 }

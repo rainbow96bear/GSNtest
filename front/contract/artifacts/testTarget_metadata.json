@@ -1,0 +1,152 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "forwarder",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "down",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getNumber",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTrustedForwarder",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "forwarder",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "forwarder",
+						"type": "address"
+					}
+				],
+				"name": "isTrustedForwarder",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "up",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"getTrustedForwarder()": {
+					"returns": {
+						"forwarder": "The address of the Forwarder contract that is being used."
+					}
+				},
+				"isTrustedForwarder(address)": {
+					"params": {
+						"forwarder": "The address of the Forwarder contract that is being used."
+					},
+					"returns": {
+						"_0": "isTrustedForwarder `true` if the Forwarder is trusted to forward relayed transactions by this Recipient."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"getTrustedForwarder()": {
+					"notice": ":warning: **Warning** :warning: The Forwarder can have a full control over your Recipient. Only trust verified Forwarder.Method is not a required method to allow Recipients to trust multiple Forwarders. Not recommended yet."
+				},
+				"isTrustedForwarder(address)": {
+					"notice": ":warning: **Warning** :warning: The Forwarder can have a full control over your Recipient. Only trust verified Forwarder."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"testTarget.sol": "testTarget"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@opengsn/contracts/src/ERC2771Recipient.sol": {
+			"keccak256": "0x77b3307c570c582969ea5466f296898ab9fea1f8b61b30f1c73345fe047a89a9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2a2f0642c775f89615b1717ee3db50cf3732f59bc66032b06fee6c9018e308b",
+				"dweb:/ipfs/QmRtsTQeTYk6muGrU7Qurjw6FeUVUBBXXhcUQNWvCoJysT"
+			]
+		},
+		"@opengsn/contracts/src/interfaces/IERC2771Recipient.sol": {
+			"keccak256": "0xc762358681e3494519a5fff2f7e3f0f74f9c9f395f23b00cdfb45e0fb9ef8170",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://68680e24b98e554eb64e724a6ddab30827d5091ae36812e2a4e1b1914481ca4c",
+				"dweb:/ipfs/QmR9TVoucNzaeiAgSu1miqoQ4SZAcMCB2yRd32YuEXVWLB"
+			]
+		},
+		"testTarget.sol": {
+			"keccak256": "0x6ee7e7966fca96b5b8ad76d547d9799afbeb8eb972e9b920bed8fadc7176d7ba",
+			"urls": [
+				"bzz-raw://9c145f53a97b47047dba4bdcd5e92e37c48ab35002a174f8f27cab63d35f2288",
+				"dweb:/ipfs/QmTFRj2nnBwF7jBVH1jEL1jC6AWC8RVg8DkksrPh135dqs"
+			]
+		}
+	},
+	"version": 1
+}
