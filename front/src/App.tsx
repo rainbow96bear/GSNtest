@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { RelayProvider, GSNConfig } from "@opengsn/provider";
-import { BrowserProvider, Contract, JsonRpcProvider, ethers } from "ethers";
+import { useState } from "react";
+import { RelayProvider } from "@opengsn/provider";
+import { BrowserProvider, ethers } from "ethers";
 import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 
@@ -34,8 +34,8 @@ function App() {
     payMaster_S_address
   );
   // contract내용은 동일
-  //relayHub address : 0x3232f21A6E08312654270c78A773f00dd61d60f5
-  //forwarder address : 0xB2b5841DBeF766d4b521221732F9B618fCf34A87
+  const relayHub = "0x3232f21A6E08312654270c78A773f00dd61d60f5";
+  const forwarder = "0xB2b5841DBeF766d4b521221732F9B618fCf34A87";
   const targetAddress = "0xBb48cB41C05C8759496fbAe115b8B612A8272C2c";
   const targetAddress_S = "0xA4194F21aC152cD7259A426c3e20a84b68e39EdD";
   // paymaster, target 배포 address : 0x5Ec22166058614fBC16AF01E400bE3f22B467759
@@ -71,7 +71,7 @@ function App() {
   const setContract_E = async () => {
     try {
       gsnRelayProvider_E = await RelayProvider.newWeb3Provider({
-        provider: web3Provider,
+        provider: web3Provider, //web3Provider = window.ethereum이기때문에 metamask에서 signer를 얻어오는 것으로 추즉
         config: gsnConfig,
       });
 
@@ -80,7 +80,7 @@ function App() {
       theContract_E = new ethers.Contract(
         targetAddress,
         testContract.abi,
-        signer // wallet선언 시 사용한 provider에 따라 어느 node를 통하여 트랜잭션을 배포할 것인지 정해진다.
+        signer
       );
       setType("Single 등록 X");
       setContractA(targetAddress);
@@ -145,6 +145,8 @@ function App() {
 
   return (
     <div className="App">
+      <div>relayHub : {relayHub}</div>
+      <div>forwarder : {forwarder}</div>
       <div> paymaster address : {paymaster}</div>
       <div>type : {paymasterType}</div>
       <div>paymaster 잔액 : {paymasterBalance}</div>
