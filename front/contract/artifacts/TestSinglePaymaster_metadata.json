@@ -25,25 +25,6 @@
 				"type": "event"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "oldTarget",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "newTarget",
-						"type": "address"
-					}
-				],
-				"name": "TargetChanged",
-				"type": "event"
-			},
-			{
 				"inputs": [],
 				"name": "CALLDATA_SIZE_LIMIT",
 				"outputs": [
@@ -106,6 +87,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_target",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "decreaseUesdAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -180,6 +179,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_target",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "increaseLimit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -419,19 +436,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_target",
-						"type": "address"
-					}
-				],
-				"name": "setTarget",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "forwarder",
 						"type": "address"
 					}
@@ -461,13 +465,19 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "target",
-				"outputs": [
+				"inputs": [
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"name": "targetWhitelist",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -487,6 +497,30 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userInfo",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "GasLimit",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "usedAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "versionPaymaster",
 				"outputs": [
@@ -497,6 +531,42 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAllowed",
+						"type": "bool"
+					}
+				],
+				"name": "whitelistTarget",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "target",
+						"type": "address"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -767,11 +837,11 @@
 			]
 		},
 		"testSinglePaymaster.sol": {
-			"keccak256": "0xdb5d50db511bb4538eb2d112b61e30eef39b1f69602ad4dc98ad553b8b9de864",
+			"keccak256": "0x8779b9fff5b697be1220ea910c7294cba289cf59be8f596412ae55b2e99a8684",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6668292d4da8008f94a16044f85b8c3ca89df29a5b472e05d70414c2a0107950",
-				"dweb:/ipfs/QmcNWTwyxHxtVeEEhZyx79iR9orDXw9nFKecqBTf8DcYqN"
+				"bzz-raw://281eaa3cb2ead89f31a663c4c10a72b27355746ddf7ed7db4f554d002b7a20d6",
+				"dweb:/ipfs/QmYPHGPh27tBRjBwCvdf2v95vECBMiiS9YQ98a6Tv4yne2"
 			]
 		}
 	},
