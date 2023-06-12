@@ -484,6 +484,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "testFrom",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -837,11 +850,11 @@
 			]
 		},
 		"testSinglePaymaster.sol": {
-			"keccak256": "0x8779b9fff5b697be1220ea910c7294cba289cf59be8f596412ae55b2e99a8684",
+			"keccak256": "0x939b4e13c0095131c7f801de514163840030ce24847a3cd913d028a5b51307a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://281eaa3cb2ead89f31a663c4c10a72b27355746ddf7ed7db4f554d002b7a20d6",
-				"dweb:/ipfs/QmYPHGPh27tBRjBwCvdf2v95vECBMiiS9YQ98a6Tv4yne2"
+				"bzz-raw://abb5d204d6aa0a51788b5c9e34f1fd2e8cb716159ed660d6b1ed42a78f3f155e",
+				"dweb:/ipfs/Qme5dAR94gGuF2LqwBwhJrRzHRDENEJaE2rZ6mLK5Gwjbk"
 			]
 		}
 	},

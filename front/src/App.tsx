@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RelayProvider } from "@opengsn/provider";
-import { BrowserProvider, ethers } from "ethers";
+import { BrowserProvider, ethers, BigNumberish } from "ethers";
 import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 
 import testContract from "./testContract.json";
 import E_paymasterABI from "./TestEverythingPaymaster.json";
 import S_paymasterABI from "./TestSinglePaymaster.json";
+import USDCABI from "./IERC20.json";
 
 function App() {
   const [contract, setContract] = useState<any>();
@@ -19,10 +20,42 @@ function App() {
   const web3 = new Web3(window.ethereum);
   const web3Provider = window.ethereum;
 
+  // permit test code start
+  const [wallet, setWallet] = useState<any>();
+  useEffect(() => {
+    const getWallet = async () => {
+      const result = await web3.eth.getAccounts();
+      setWallet(result);
+    };
+    getWallet();
+  });
+  const getSigner = async () => {
+    const metamaskProvider = new BrowserProvider(web3Provider);
+    const permitSigner = await metamaskProvider.getSigner();
+    const isAllowed = true;
+    const amount = "10000000";
+    const deadline = Math.floor(Date.now() / 1000) + 3600; // 기한 (1시간)
+
+    // 사용자의 지갑 선택 및 권한 요청
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const message = ethers.solidityPacked(
+      ["address", "bool", "uint32", "uint256"],
+      [targetAddress_S, isAllowed, amount, deadline]
+    );
+    console.log("AddFunds Message:", ethers.hexlify(message));
+
+    // 서명 생성
+    const signature = await permitSigner.signMessage(message);
+
+    console.log("Signature:", signature);
+  };
+
+  // permit test code end
+
   // E : EverythingPaymaster
   // S : SinglePaymaster
   const payMaster_E_address = "0xfA409d63b423bc3a9B89e4f3aC34f87CE9804e11";
-  const payMaster_S_address = "0xeE47FeeB61778fDfe209b64ea3769654449E17Ae";
+  const payMaster_S_address = "0xFEc08ba9Ee6025F891bE530F561767097480D317";
 
   const Instance_E = new web3.eth.Contract(
     E_paymasterABI.abi as AbiItem[],
@@ -39,12 +72,6 @@ function App() {
   const targetAddress = "0xBb48cB41C05C8759496fbAe115b8B612A8272C2c";
   const targetAddress_S = "0xA4194F21aC152cD7259A426c3e20a84b68e39EdD";
   // paymaster, target 배포 address : 0x5Ec22166058614fBC16AF01E400bE3f22B467759
-  const MetaMaskProvider = new BrowserProvider(web3Provider);
-
-  const wallet_MetaMask = new ethers.Wallet(
-    "fd9a5346813a30c948c934648ef9999ef95cdea977aee4c614c672518735e6b3",
-    MetaMaskProvider
-  );
 
   let gsnRelayProvider_E: RelayProvider;
   let gsnRelayProvider_S: RelayProvider;
@@ -209,6 +236,12 @@ function App() {
           testGetTranscation
         </button>
       </div>
+      <button
+        onClick={async () => {
+          getSigner();
+        }}>
+        messageHash
+      </button>
     </div>
   );
 }
