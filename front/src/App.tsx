@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
-import { RelayProvider } from "@opengsn/provider";
-import { BrowserProvider, ethers, BigNumberish } from "ethers";
+import { ethers } from "ethers";
+import {
+  GsnEvent,
+  RelayProvider,
+  environments,
+  validateRelayUrl,
+  GSNConfig,
+} from "@opengsn/provider";
 import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 
@@ -30,24 +36,32 @@ function App() {
     getWallet();
   });
   const getSigner = async () => {
-    const metamaskProvider = new BrowserProvider(web3Provider);
-    const permitSigner = await metamaskProvider.getSigner();
+    const metamaskProvider = new ethers.providers.Web3Provider(web3Provider);
+    const permitSigner = metamaskProvider.getSigner();
     const isAllowed = true;
     const amount = "10000000";
     const deadline = Math.floor(Date.now() / 1000) + 3600; // 기한 (1시간)
 
     // 사용자의 지갑 선택 및 권한 요청
     await window.ethereum.request({ method: "eth_requestAccounts" });
-    const message = ethers.solidityPacked(
+    const message = ethers.utils.solidityPack(
       ["address", "bool", "uint32", "uint256"],
       [targetAddress_S, isAllowed, amount, deadline]
     );
-    console.log("AddFunds Message:", ethers.hexlify(message));
+    console.log("AddFunds Message:", ethers.utils.hexlify(message));
 
     // 서명 생성
     const signature = await permitSigner.signMessage(message);
 
     console.log("Signature:", signature);
+
+    const signatureBytes = ethers.utils.arrayify(signature);
+    const v = signatureBytes[64] + 27;
+    const r = ethers.utils.hexlify(signatureBytes.slice(0, 32));
+    const s = ethers.utils.hexlify(signatureBytes.slice(32, 64));
+    console.log("v:", v);
+    console.log("r:", r);
+    console.log("s:", s);
   };
 
   // permit test code end
@@ -73,11 +87,11 @@ function App() {
   const targetAddress_S = "0xA4194F21aC152cD7259A426c3e20a84b68e39EdD";
   // paymaster, target 배포 address : 0x5Ec22166058614fBC16AF01E400bE3f22B467759
 
-  let gsnRelayProvider_E: RelayProvider;
-  let gsnRelayProvider_S: RelayProvider;
+  let gsnRelayProvider_E: any;
+  let gsnRelayProvider_S: any;
   let theContract_E: any;
   let theContract_S: any;
-  let signer;
+
   const setsetPaymasterToEveryting = () => {
     setPaymasterType("Everything");
     setPaymaster(payMaster_E_address);
@@ -98,12 +112,12 @@ function App() {
   const setContract_E = async () => {
     try {
       gsnRelayProvider_E = await RelayProvider.newWeb3Provider({
-        provider: web3Provider, //web3Provider = window.ethereum이기때문에 metamask에서 signer를 얻어오는 것으로 추즉
+        provider: web3Provider,
         config: gsnConfig,
       });
+      const provider2 = new ethers.providers.Web3Provider(gsnRelayProvider_E);
 
-      const gsnProvider_E = new BrowserProvider(gsnRelayProvider_E);
-      signer = await gsnProvider_E.getSigner();
+      const signer = provider2.getSigner();
       theContract_E = new ethers.Contract(
         targetAddress,
         testContract.abi,
@@ -122,9 +136,10 @@ function App() {
         provider: web3Provider,
         config: gsnConfig,
       });
+      const provider2 = new ethers.providers.Web3Provider(gsnRelayProvider_S);
 
-      const gsnProvider_S = new BrowserProvider(gsnRelayProvider_S);
-      signer = await gsnProvider_S.getSigner();
+      const signer = provider2.getSigner();
+      console.log(signer);
       theContract_S = new ethers.Contract(
         targetAddress_S,
         testContract.abi,
