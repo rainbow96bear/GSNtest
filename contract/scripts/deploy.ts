@@ -1,10 +1,11 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const paymaster = await ethers.getContractFactory("SampleToken");
+  const paymaster = await ethers.getContractFactory("testContract");
   // console.log(paymaster);
+  const token = "0xA3419F30F02aE34A1E377D2829dfdCE35F08c76c";
   const paymasterContract = await paymaster.deploy();
-  // console.log(paymasterContract);
+  console.log(paymasterContract);
   const Contract = await paymasterContract.deployed();
   console.log("deployed to : ", Contract.address);
 }
