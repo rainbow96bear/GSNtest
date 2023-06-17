@@ -12,16 +12,27 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@openzeppelin/hardhat-upgrades": "^1.27.0",
+    "@types/jest": "^29.5.2",
+    "@types/mocha": "^10.0.1",
     "chai": "^4.3.7",
     "dotenv": "^16.1.4",
     "ethers": "^5.7.2",
     "hardhat": "^2.15.0",
+    "hardhat-deploy": "^0.11.30",
+    "mocha": "^10.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"
   },
   "dependencies": {
+    "@opengsn/common": "^3.0.0-beta.6",
     "@opengsn/contracts": "^3.0.0-beta.6",
     "@remix-project/remixd": "^0.6.14",
-    "@uniswap/v3-periphery": "^1.4.3"
+    "@types/chai": "^4.3.5",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/web3": "^1.2.2",
+    "@uniswap/v3-periphery": "^1.4.3",
+    "bignumber": "^1.1.0",
+    "chai-as-promised": "^7.1.1",
+    "ethers-eip712": "^0.2.0"
   }
 }

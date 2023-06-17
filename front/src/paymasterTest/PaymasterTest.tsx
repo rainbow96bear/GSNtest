@@ -36,14 +36,53 @@ const ProjectTest = () => {
 
     // 사용자의 지갑 선택 및 권한 요청
     await window.ethereum.request({ method: "eth_requestAccounts" });
-    const message = ethers.solidityPacked(
-      ["address", "bool", "uint32", "uint256"],
-      [targetAddress_S, isAllowed, amount, deadline]
-    );
-    // console.log("AddFunds Message:", ethers.utils.hexlify(message));
+    // const message = ethers.solidityPacked(
+    //   ["address", "bool", "uint32", "uint256"],
+    //   [targetAddress_S, isAllowed, amount, deadline]
+    // );
+    // // console.log("AddFunds Message:", ethers.utils.hexlify(message));
 
-    // 서명 생성
-    const signature = await permitSigner.signMessage(message);
+    // // 서명 생성
+    // const signature = await permitSigner.signMessage(message);
+    const signature = await permitSigner.signTypedData(
+      {
+        name: "SampleToken",
+        version: "1",
+        chainId: 80001,
+        verifyingContract: "0x1980A588fA420E874fC5fB1e0E68FBE39c34672f",
+      },
+      {
+        Permittt: [
+          {
+            name: "owner",
+            type: "address",
+          },
+          {
+            name: "spender",
+            type: "address",
+          },
+          {
+            name: "value",
+            type: "uint256",
+          },
+          {
+            name: "nonce",
+            type: "uint256",
+          },
+          {
+            name: "deadline",
+            type: "uint256",
+          },
+        ],
+      },
+      {
+        owner: permitSigner.address,
+        spender: "0x5Ec22166058614fBC16AF01E400bE3f22B467759",
+        value: 100000000,
+        nonce: 0,
+        deadline,
+      }
+    );
 
     console.log("Signature:", signature);
 

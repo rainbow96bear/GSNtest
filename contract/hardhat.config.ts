@@ -1,22 +1,18 @@
 import { HardhatUserConfig } from "hardhat/config";
-// import "@nomicfoundation/hardhat-toolbox";
+import Config from "./helper-hardhat-config";
+import "hardhat-deploy";
 import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
-import dotenv from "dotenv";
+import "@nomiclabs/hardhat-etherscan";
 
+import dotenv from "dotenv";
 dotenv.config();
 
 const { ALCHEMY_URL, METAMASK_KEY } = process.env;
+const MAINNET_RPC_URL = process.env.ALCHEMY_URL;
+const PRIVATE_KEY = METAMASK_KEY;
 const config: HardhatUserConfig = {
-  solidity: "0.8.18",
-  defaultNetwork: "mumbai",
-  networks: {
-    hardhat: {},
-    mumbai: {
-      url: ALCHEMY_URL,
-      accounts: [`0x${METAMASK_KEY}`],
-    },
-  },
+  ...Config,
 };
 
 export default config;

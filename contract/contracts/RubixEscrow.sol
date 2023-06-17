@@ -5,12 +5,13 @@ import {ISwapRouter} from "@uniswap/v3-periphery/contracts/interfaces/ISwapRoute
 import {TransferHelper} from "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
 import {BasePaymaster, GsnTypes} from "@opengsn/contracts/src/BasePaymaster.sol";
 import {IERC20} from "./IERC20.sol";
+import "hardhat/console.sol";
 
 contract RubixEscrow is BasePaymaster {
     mapping(address => bool) public targetWhitelist;
     mapping(address => uint256) public usedAmount;
-    uint8 private constant GWEI_DECIMALS = 9;
-    uint256 private constant GAS_LIMIT = 1 * 10 ** GWEI_DECIMALS;
+    uint8 private constant WEI_DECIMALS = 18;
+    uint256 private constant GAS_LIMIT = 1 * 10**WEI_DECIMALS;
 
     address private currency_address;
     IERC20 private currency_contract;
@@ -25,11 +26,11 @@ contract RubixEscrow is BasePaymaster {
     }
 
     function versionPaymaster() external view virtual override returns (string memory) {
-        return "3.0.0-beta.3";
+        return "3.0.0-beta.3+rubix.escrow.ipaymaster";
     }
 
     function addFunds(address owner, uint256 amount) public {
-        require(amount >= 100 * 10 ** currency_contract.decimals(), "amount is less than 100");
+        require(amount >= 100 * 10**currency_contract.decimals(), "amount is less than 100");
         currency_contract.transferFrom(owner, address(this), amount);
         currency_contract.approve(msg.sender, amount);
         targetWhitelist[msg.sender] = true;
